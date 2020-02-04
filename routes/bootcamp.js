@@ -1,43 +1,16 @@
-const express =require('express')
+const express = require('express')
 const router = express.Router()
+const {
+    createBootcamp, deleteBootcamp, getBootcamp, getBootcamps, updateBootcamp
+} = require('../controllers/bootcamp')
 
-/*
-*   Now we will define various routes for get, post, delete and update request on bootcamp.
-*   Structure : REQUEST /api/v1/bootcamp/{}
-*/
-router.get('/', (req, res) => {
-    res.status(200).json({
-        success : true,
-        msg : "Show all bootcamps"
-    })
-})
+router.route('/')
+    .post(createBootcamp)
+    .get(getBootcamps)
 
-router.get('/:id', (req, res) => {
-    res.status(200).json({
-        success : true,
-        msg : `Getting bootcamp id ${req.params.id}`
-    })
-})
-
-router.post('/', (req, res)=>{
-    res.status(200).json({
-        success : true,
-        msg: "Created a new bootcamp"
-    })
-})
-
-router.put('/:id',(req, res)=>{
-    res.status(200).json({
-        success : true,
-        msg: `Update bootcamp id ${req.params.id}`
-    })
-})
-
-router.delete('/:id', (req, res)=> {
-    res.status(200).json({
-        success : true,
-        msg: `Deleted bootcamp id ${req.params.id}`
-    })
-})
+router.route('/:id')
+    .get(getBootcamp)
+    .put(updateBootcamp)
+    .delete(deleteBootcamp)
 
 module.exports = router
