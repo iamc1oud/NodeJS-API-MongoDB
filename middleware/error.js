@@ -10,19 +10,19 @@ const errorHandler = (err, req, res, next) => {
     console.log(err);
     
     // Mongoose bad objectId
-    if(err.name == 'CastError') {
+    if(err.name === 'CastError') {
         const message = `Bootcamp not found with id of ${err.value}`
         error = new ErrorResponse(message, 404)
     }
 
     // Mongoose duplicate key error handler
-    if(err.code == 11000){
+    if(err.code === 11000){
         const message = `Duplicate field value entered`
         error = new ErrorResponse(message, 500)
     }
 
     // Mongoose validation error
-    if(err.name == 'ValidationError'){
+    if(err.name === 'ValidationError'){
         const message = Object.values(err.errors).map(val => val.message)
         error = new ErrorResponse(message, 400)
     }
