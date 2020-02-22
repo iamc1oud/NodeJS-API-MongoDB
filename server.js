@@ -4,7 +4,7 @@ const dotenv = require('dotenv')
 const morgan = require('morgan')
 const colors = require('colors')
 const connectDB = require('./config/db')
-
+const errorHandler = require('./middleware/error')
 // Import routes
 const bootcamps = require('./routes/bootcamp')
 
@@ -24,5 +24,6 @@ app.use(express.json())
 // Mount routers (Middleware)
 app.use('/api/v1/bootcamps', bootcamps)
 
+app.use(errorHandler)
 
 app.listen(process.env.PORT, () => console.log("Server started".yellow.bold))
